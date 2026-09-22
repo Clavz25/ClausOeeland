@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #F8F6F2;
+  --color-ink: #1E1E1E;
+  --color-teal: #4E9E87;
+  --color-red: #DE3E2D;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: "Barlow Condensed", sans-serif;
+  --animate-rise-in: rise-in 1s cubic-bezier(.2,.8,.2,1) both;
+  --animate-fade-up: fade-up .9s cubic-bezier(.2,.8,.2,1) both;
+
+  /* Phone/desktop split sits at the 760px the design spec calls out, so `md:`
+     means "the wide layout" everywhere in the components. */
+  --breakpoint-md: 47.5rem;
+
+  @keyframes rise-in { from { transform: translateY(110%); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+  @keyframes fade-up { from { transform: translateY(24px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+}
+
+html, body { margin: 0; background: var(--color-paper); color: var(--color-ink); -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-mono); overflow-x: hidden; }
+
+/* Phones: no iOS text inflation in landscape, no grey flash on tap. */
+html { -webkit-text-size-adjust: 100%; }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+/* Keep the arrival, drop the travel. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: .01ms !important;
+  }
+}

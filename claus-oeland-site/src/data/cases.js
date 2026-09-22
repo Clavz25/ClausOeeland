@@ -1,0 +1,101 @@
+// Case content. bg/fg/border drive the card colour; tile/tileFg colour the icon squares in the fold-out.
+
+// Placeholder until the real work images land — same frame in every gallery slot.
+const PLACEHOLDER = '/pax_facebook%20ad17.jpg'
+const placeholderGallery = (captions) =>
+  captions.map((caption) => ({ src: PLACEHOLDER, alt: `${caption} — placeholder image`, caption }))
+
+export const cases = [
+  {
+    id: 'paxinox',
+    title: 'PAXINOX',
+    client: 'NYX Medico · Paxinox',
+    year: '2022 – 2024',
+    markets: 'DK · SE · NO',
+    bg: '#4E9E87',
+    fg: '#F8F6F2',
+    border: '#4E9E87',
+    tile: '#F8F6F2',
+    tileFg: '#4E9E87',
+    image: '/nasalspray.png',
+    logo: '/PAX_light_logo.png',
+    list: [
+      'MVP development',
+      'GO-TO-MARKET dev',
+      'Marketing analytics',
+      'Branding dev/strategy',
+      'Marketing Strategy',
+      'Social Marketing',
+      'SEO',
+    ],
+    headline: 'Making new products grow',
+    problem:
+      'A new anti-snoring nasal spray with a proven formula but no brand, no positioning and no route to market. Placeholder — here should be the story of what the problem was.',
+    done: 'Brand strategy, visual identity and style guide, packaging, product renders, webshop, launch campaign and analytics setup across the Nordic markets.',
+    tags: ['MVP', 'Go-to-market', 'Branding', 'Analytics', 'Social', 'SEO'],
+    results:
+      'From first production run to webshop launch and first sales in under 12 months. Metrics are placeholders pending final numbers.',
+    metrics: [
+      { value: '3', label: 'Nordic markets' },
+      { value: '12 MO', label: 'Idea to launch' },
+      { value: '—', label: 'KPIs' },
+    ],
+    gallery: [
+      { src: '/paxCampaign.jpg', alt: 'Paxinox campaign visual', caption: 'Campaign' },
+      ...placeholderGallery(['Social ad', 'Packaging', 'Webshop', 'Style guide']),
+    ],
+    footer: 'Ref. 01 · Paxinox · Brand → Growth',
+  },
+  {
+    id: 'proj-2',
+    title: 'proj 2',
+    client: 'Client · Placeholder',
+    year: '2025',
+    markets: '—',
+    bg: '#F8F6F2',
+    fg: '#1E1E1E',
+    border: '#1E1E1E',
+    tile: '#1E1E1E',
+    tileFg: '#F8F6F2',
+    image: null,
+    list: null,
+    headline: 'Placeholder headline',
+    problem: 'Placeholder. Here should be the story of what the problem was.',
+    done: 'Placeholder. What was done: strategy, identity, campaign, funnel.',
+    tags: ['Strategy', 'Design', 'Data'],
+    results: 'Placeholder. Measurable business outcome.',
+    metrics: [
+      { value: '—', label: 'Conversion' },
+      { value: '—', label: 'CAC' },
+      { value: '—', label: 'Revenue' },
+    ],
+    gallery: placeholderGallery(['Placeholder', 'Placeholder', 'Placeholder']),
+    footer: 'Ref. 02 · Placeholder',
+  },
+  {
+    id: 'proj-3',
+    title: 'proj 3',
+    client: 'Client · Placeholder',
+    year: '2025',
+    markets: '—',
+    bg: '#DE3E2D',
+    fg: '#F8F6F2',
+    border: '#DE3E2D',
+    tile: '#F8F6F2',
+    tileFg: '#DE3E2D',
+    image: null,
+    list: null,
+    headline: 'Placeholder headline',
+    problem: 'Placeholder. Here should be the story of what the problem was.',
+    done: 'Placeholder. What was done: strategy, identity, campaign, funnel.',
+    tags: ['Strategy', 'Design', 'Data'],
+    results: 'Placeholder. Measurable business outcome.',
+    metrics: [
+      { value: '—', label: 'Engagement' },
+      { value: '—', label: 'Growth' },
+      { value: '—', label: 'Revenue' },
+    ],
+    gallery: placeholderGallery(['Placeholder', 'Placeholder', 'Placeholder']),
+    footer: 'Ref. 03 · Placeholder',
+  },
+];

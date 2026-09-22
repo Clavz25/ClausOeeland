@@ -1,0 +1,389 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@400;500&display=swap">
+  <style>
+    /*__FONTS__*/
+    :root {
+      --paper: #fcf8f5;
+      --ink: #111111;
+      --ink-2: #4a4745;
+      --muted: #8f8d8b;
+      --line: #c5c2c0;
+      --line-soft: #e6e1dc;
+      --green: #5a9480;
+      --red: #d53f30;
+      --cyan: #16b1cf;
+      --orange: #e38727;
+      --display: "Tabular", "Archivo Narrow", "Arial Narrow", sans-serif;
+      --mono: "Spline Sans Mono", "IBM Plex Mono", Menlo, monospace;
+      --index: "Punc", "Spline Sans Mono", monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--paper); }
+    body { font-family: var(--display); color: var(--ink); -webkit-font-smoothing: antialiased; }
+    a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: var(--red); }
+    .label { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+    .idx { font-family: var(--index); font-size: 14px; letter-spacing: .04em; }
+    .btn { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; background: none; border: 1px solid var(--ink); color: var(--ink); padding: 12px 18px; min-height: 44px; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; }
+    .btn:hover { background: var(--ink); color: var(--paper); }
+    .card { position: relative; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; min-height: 520px; padding: 20px; transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s; overflow: hidden; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 30px 50px -30px rgba(17,17,17,.45); }
+    .card .art { transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+    .card:hover .art { transform: scale(1.04); }
+    .card .arrow { transition: transform .35s; }
+    .card:hover .arrow { transform: translate(6px, -6px); }
+    .ticker { white-space: nowrap; overflow: hidden; }
+    .ticker span { display: inline-block; animation: tick 40s linear infinite; }
+    @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .reveal { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .seg:hover { opacity: .8; }
+    @media (max-width: 760px) {
+      .topbar { flex-direction: column; align-items: flex-start !important; gap: 8px !important; }
+      .hero { grid-template-columns: 1fr !important; }
+      .name-big { font-size: 96px !important; line-height: .9 !important; }
+      .name-small { font-size: 44px !important; }
+      .cards { grid-template-columns: 1fr !important; }
+      .card { min-height: 440px !important; }
+      .case-head { grid-template-columns: 1fr !important; }
+      .meta { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+      .takeaways { grid-template-columns: 1fr !important; }
+      .h-case { font-size: 72px !important; }
+      .services { columns: 1 !important; }
+      .pad { padding-left: 20px !important; padding-right: 20px !important; }
+    }
+  </style>
+</helmet>
+
+<div style="min-height: 100vh; display: flex; flex-direction: column; background: #fcf8f5; color: #111111;">
+
+  <!-- ============ HUB ============ -->
+  <sc-if value="{{ isHub }}" hint-placeholder-val="{{ true }}">
+  <div style="display: flex; flex-direction: column; flex-grow: 1;">
+
+    <div class="topbar pad" style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 18px 48px; border-bottom: 1px solid #111111;">
+      <div class="ticker" style="flex-grow: 1; max-width: 640px;">
+        <span class="label" style="color: #111111;">BRANDING&nbsp;&nbsp;|&nbsp;&nbsp;MARKETING STRATEGY&nbsp;&nbsp;|&nbsp;&nbsp;DESIGN&nbsp;&nbsp;|&nbsp;&nbsp;DATA ANALYSIS&nbsp;&nbsp;|&nbsp;&nbsp;DEVELOPMENT&nbsp;&nbsp;|&nbsp;&nbsp;BRANDING&nbsp;&nbsp;|&nbsp;&nbsp;MARKETING STRATEGY&nbsp;&nbsp;|&nbsp;&nbsp;DESIGN&nbsp;&nbsp;|&nbsp;&nbsp;DATA ANALYSIS&nbsp;&nbsp;|&nbsp;&nbsp;DEVELOPMENT&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      </div>
+      <div style="display: flex; gap: 28px; flex-shrink: 0;">
+        <a class="label" href="mailto:clausnich@gmail.com" style="text-decoration: none; text-transform: none; letter-spacing: .02em;">email: clausnich@gmail.com</a>
+        <span class="label" style="text-transform: none; letter-spacing: .02em;">tlf: 23676950</span>
+      </div>
+    </div>
+
+    <div class="hero pad reveal" style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 48px; padding: 56px 48px 40px; align-items: end;">
+      <div style="display: flex; flex-direction: column; gap: 0;">
+        <div class="name-small" style="font-family: var(--display); font-weight: 700; font-size: 72px; line-height: .95; letter-spacing: -.01em; color: #111111;">CLAUS</div>
+        <div class="name-big" style="font-family: var(--display); font-weight: 700; font-size: 168px; line-height: .88; letter-spacing: -.02em; color: #111111;">ØELAND</div>
+        <div style="font-family: var(--display); font-weight: 400; font-size: 22px; line-height: 1.3; color: #4a4745; margin-top: 22px; max-width: 520px; text-wrap: pretty;">Designing with creativity and statistical data</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px; border-top: 1px solid #111111; padding-top: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+          <span class="label">What I do</span>
+          <span class="idx" style="color: #8f8d8b;">SERIES 01 / 07</span>
+        </div>
+        <div class="services" style="columns: 2; column-gap: 24px; font-family: var(--mono); font-size: 13px; line-height: 1.9; color: #111111;">
+          <div>01&nbsp;&nbsp;MVP development</div>
+          <div>02&nbsp;&nbsp;Go-to-market development</div>
+          <div>03&nbsp;&nbsp;Marketing analytics</div>
+          <div>04&nbsp;&nbsp;Branding dev / strategy</div>
+          <div>05&nbsp;&nbsp;Marketing strategy</div>
+          <div>06&nbsp;&nbsp;Social marketing</div>
+          <div>07&nbsp;&nbsp;SEO</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pad" style="display: flex; justify-content: space-between; align-items: baseline; padding: 8px 48px 12px; border-bottom: 1px solid #111111; margin: 0 0 0 0;">
+      <span class="label" style="color: #111111;">Selected work</span>
+      <span class="label">Click a card to open the case</span>
+    </div>
+
+    <div class="cards pad reveal" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding: 20px 48px 48px; animation-delay: .12s;">
+
+      <!-- Card 01 · PAXINOX -->
+      <div class="card" onClick="{{ goPax }}" style="background: #5a9480; color: #fcf8f5;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <span class="idx">01</span>
+          <span class="label" style="color: #fcf8f5; opacity: .85;">Data analysis · Branding</span>
+        </div>
+        <div class="art" style="position: absolute; right: 8px; top: 48px; bottom: 120px; width: 46%; display: flex; align-items: center; justify-content: flex-end;">
+          <img src="paxinox-spray.webp" alt="PAXINOX nasal spray" style="max-height: 100%; max-width: 100%; object-fit: contain; filter: drop-shadow(0 20px 30px rgba(0,0,0,.25));">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px; max-width: 58%;">
+          <div style="font-family: var(--display); font-weight: 700; font-size: 44px; line-height: .95; letter-spacing: -.01em;">PAXINOX</div>
+          <div style="font-family: var(--display); font-size: 15px; line-height: 1.35; color: #fcf8f5; opacity: .9; text-wrap: pretty;">Does an anti-snoring spray actually work? A user test of 22 people, read honestly.</div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(252,248,245,.4); padding-top: 12px;">
+          <span class="label" style="color: #fcf8f5;">Case 01</span>
+          <svg class="arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fcf8f5" stroke-width="2" stroke-linecap="square"><path d="M6 18 18 6M8 6h10v10"></path></svg>
+        </div>
+      </div>
+
+      <!-- Card 02 · slot -->
+      <div class="card" onClick="{{ goSlot2 }}" style="background: #fcf8f5; color: #111111; border: 1px solid #111111;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <span class="idx">02</span>
+          <span class="label">[YOUR ROLE]</span>
+        </div>
+        <div class="art" style="margin: 16px 0; flex-grow: 1; border: 1px dashed #8f8d8b; display: flex; align-items: center; justify-content: center;">
+          <span class="label" style="color: #8f8d8b;">[IMAGE .PNG]</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <div style="font-family: var(--display); font-weight: 700; font-size: 44px; line-height: .95; letter-spacing: -.01em;">[PROJECT 02]</div>
+          <div style="font-family: var(--display); font-size: 15px; line-height: 1.35; color: #4a4745; text-wrap: pretty;">[One sentence on what the project was and what you achieved.]</div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #111111; padding-top: 12px; margin-top: 16px;">
+          <span class="label" style="color: #111111;">Case 02</span>
+          <svg class="arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="square"><path d="M6 18 18 6M8 6h10v10"></path></svg>
+        </div>
+      </div>
+
+      <!-- Card 03 · slot -->
+      <div class="card" onClick="{{ goSlot3 }}" style="background: {{ accent }}; color: #fcf8f5;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <span class="idx">03</span>
+          <span class="label" style="color: #fcf8f5; opacity: .85;">[YOUR ROLE]</span>
+        </div>
+        <div class="art" style="margin: 16px 0; flex-grow: 1; border: 1px dashed rgba(252,248,245,.6); display: flex; align-items: center; justify-content: center;">
+          <span class="label" style="color: #fcf8f5; opacity: .8;">[IMAGE .PNG]</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <div style="font-family: var(--display); font-weight: 700; font-size: 44px; line-height: .95; letter-spacing: -.01em;">[PROJECT 03]</div>
+          <div style="font-family: var(--display); font-size: 15px; line-height: 1.35; color: #fcf8f5; opacity: .9; text-wrap: pretty;">[One sentence on what the project was and what you achieved.]</div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(252,248,245,.4); padding-top: 12px; margin-top: 16px;">
+          <span class="label" style="color: #fcf8f5;">Case 03</span>
+          <svg class="arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fcf8f5" stroke-width="2" stroke-linecap="square"><path d="M6 18 18 6M8 6h10v10"></path></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="pad" style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 48px; border-top: 1px solid #111111;">
+      <span class="label">© 2026 Claus Øeland · Denmark</span>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <span style="width: 12px; height: 12px; background: #d53f30; display: inline-block;"></span>
+        <span style="width: 12px; height: 12px; background: #16b1cf; display: inline-block;"></span>
+        <span style="width: 12px; height: 12px; background: #43a13e; display: inline-block;"></span>
+        <span style="width: 12px; height: 12px; background: #e38727; display: inline-block;"></span>
+        <span style="width: 12px; height: 12px; background: #969696; display: inline-block;"></span>
+      </div>
+      <a class="btn" href="mailto:clausnich@gmail.com" style="text-decoration: none;">Get in touch
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 18 18 6M8 6h10v10"></path></svg>
+      </a>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ CASE 01 · PAXINOX ============ -->
+  <sc-if value="{{ isPax }}" hint-placeholder-val="{{ false }}">
+  <div class="reveal" style="display: flex; flex-direction: column; flex-grow: 1;">
+
+    <div class="topbar pad" style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 14px 48px; border-bottom: 1px solid #111111;">
+      <button class="btn" onClick="{{ goHub }}" style="border: none; padding-left: 0;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M18 12H6M12 6l-6 6 6 6"></path></svg>
+        Index
+      </button>
+      <span class="idx" style="color: #8f8d8b;">CASE 01 / 03</span>
+    </div>
+
+    <div class="case-head pad" style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 48px; padding: 48px 48px 32px; align-items: end; border-bottom: 1px solid #111111;">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <span class="label">Data analysis · Branding visuals · 2026</span>
+        <div class="h-case" style="font-family: var(--display); font-weight: 700; font-size: 128px; line-height: .88; letter-spacing: -.02em; color: #111111;">PAXINOX</div>
+        <div style="font-family: var(--display); font-size: 22px; line-height: 1.3; color: #4a4745; max-width: 560px; text-wrap: pretty;">A new anti-snoring nasal spray went through a user test. I turned 22 questionnaires into one honest answer for the product team.</div>
+      </div>
+      <div class="meta" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border: 1px solid #111111;">
+        <div style="padding: 12px 14px; border-right: 1px solid #111111; border-bottom: 1px solid #111111;"><div class="label">Sample</div><div style="font-family: var(--display); font-weight: 700; font-size: 32px; line-height: 1.1;">22</div><div class="label" style="text-transform: none; color: #8f8d8b;">test persons</div></div>
+        <div style="padding: 12px 14px; border-bottom: 1px solid #111111;"><div class="label">Questions</div><div style="font-family: var(--display); font-weight: 700; font-size: 32px; line-height: 1.1;">9</div><div class="label" style="text-transform: none; color: #8f8d8b;">Likert-scale items</div></div>
+        <div style="padding: 12px 14px; border-right: 1px solid #111111;"><div class="label">My role</div><div style="font-family: var(--display); font-size: 15px; line-height: 1.35; margin-top: 4px;">Survey analysis, charting, written report, product &amp; audience visuals</div></div>
+        <div style="padding: 12px 14px;"><div class="label">Tools</div><div style="font-family: var(--display); font-size: 15px; line-height: 1.35; margin-top: 4px;">Python (pandas, matplotlib), Excel, Photoshop</div></div>
+      </div>
+    </div>
+
+    <div class="pad" style="display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 40px 48px;">
+      <div style="display: flex; flex-direction: column; gap: 10px; max-width: 880px;">
+        <span class="label" style="color: #d53f30;">Main finding</span>
+        <div style="font-family: var(--display); font-weight: 700; font-size: 40px; line-height: 1.05; letter-spacing: -.01em; text-wrap: balance;">The product is well tolerated — but the test does not document an effect on snoring.</div>
+        <div style="font-family: var(--display); font-size: 17px; line-height: 1.5; color: #4a4745; text-wrap: pretty;">The decisive question is the one where snoring was judged from outside — by a partner or a recording. There, 81% see no or only a slight change, and not a single participant reports a big one. Participants' own experience is a touch more positive, which points to self-report bias rather than a real effect.</div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; border: 1px solid #111111; padding: 20px 24px 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px;">
+          <div style="font-family: var(--display); font-weight: 700; font-size: 18px;">Share of answers per question, centred on the neutral answer</div>
+          <span class="label" style="color: #8f8d8b;">n = 21–22 · % of answers</span>
+        </div>
+        <!--__CHART__-->
+        <div style="display: flex; gap: 18px; flex-wrap: wrap; align-items: center; padding-top: 4px; border-top: 1px solid #e6e1dc;">
+          <span class="label" style="display: inline-flex; align-items: center; gap: 6px; text-transform: none;"><span style="width: 10px; height: 10px; background: #a82a29; display: inline-block;"></span>Clearly negative</span>
+          <span class="label" style="display: inline-flex; align-items: center; gap: 6px; text-transform: none;"><span style="width: 10px; height: 10px; background: #e9605d; display: inline-block;"></span>Slightly negative</span>
+          <span class="label" style="display: inline-flex; align-items: center; gap: 6px; text-transform: none;"><span style="width: 10px; height: 10px; background: #d3d5de; display: inline-block;"></span>Neutral / no difference</span>
+          <span class="label" style="display: inline-flex; align-items: center; gap: 6px; text-transform: none;"><span style="width: 10px; height: 10px; background: #6da7ec; display: inline-block;"></span>Slightly positive</span>
+          <span class="label" style="display: inline-flex; align-items: center; gap: 6px; text-transform: none;"><span style="width: 10px; height: 10px; background: #1c5cab; display: inline-block;"></span>Clearly positive</span>
+        </div>
+      </div>
+
+      <div class="takeaways" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 10px; border-top: 2px solid #111111; padding-top: 14px;">
+          <span class="idx">01</span>
+          <div style="font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1.15;">Outside view beats self-report</div>
+          <div style="font-family: var(--display); font-size: 15px; line-height: 1.5; color: #4a4745; text-wrap: pretty;">Partners saw less change than participants felt. When the external measure is the weaker one, the honest reading is bias, not effect. The 52% "moderate" middle should not be counted as a partial win.</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; border-top: 2px solid #111111; padding-top: 14px;">
+          <span class="idx">02</span>
+          <div style="font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1.15;">Two questions, one contradiction</div>
+          <div style="font-family: var(--display); font-size: 15px; line-height: 1.5; color: #4a4745; text-wrap: pretty;">82% report no side effects, yet 45% feel noticeable discomfort using the spray. The questions don't measure the same thing — and that friction is what makes people quit a daily product.</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; border-top: 2px solid #111111; padding-top: 14px;">
+          <span class="idx">03</span>
+          <div style="font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1.15;">What the next test needs</div>
+          <div style="font-family: var(--display); font-size: 15px; line-height: 1.5; color: #4a4745; text-wrap: pretty;">A baseline measurement and a control group before any effect claim; a reworded discomfort question; and a taste that is more than "acceptable" — 0% called it very pleasant.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pad" style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 48px; border-top: 1px solid #111111;">
+      <button class="btn" onClick="{{ goHub }}" style="border: none; padding-left: 0;">Back to index</button>
+      <button class="btn" onClick="{{ goSlot2 }}">Next case · 02
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 12h12M12 6l6 6-6 6"></path></svg>
+      </button>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ CASE 02 · slot ============ -->
+  <sc-if value="{{ isSlot2 }}" hint-placeholder-val="{{ false }}">
+  <div class="reveal" style="display: flex; flex-direction: column; flex-grow: 1;">
+    <div class="topbar pad" style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 14px 48px; border-bottom: 1px solid #111111;">
+      <button class="btn" onClick="{{ goHub }}" style="border: none; padding-left: 0;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M18 12H6M12 6l-6 6 6 6"></path></svg>
+        Index
+      </button>
+      <span class="idx" style="color: #8f8d8b;">CASE 02 / 03</span>
+    </div>
+    <div class="case-head pad" style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 48px; padding: 48px 48px 32px; align-items: end; border-bottom: 1px solid #111111;">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <span class="label">[YOUR ROLE] · [YEAR]</span>
+        <div class="h-case" style="font-family: var(--display); font-weight: 700; font-size: 128px; line-height: .88; letter-spacing: -.02em; color: #111111;">[PROJECT 02]</div>
+        <div style="font-family: var(--display); font-size: 22px; line-height: 1.3; color: #4a4745; max-width: 560px; text-wrap: pretty;">[Two sentences: what the client or product needed, and what you did about it.]</div>
+      </div>
+      <div class="meta" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border: 1px solid #111111;">
+        <div style="padding: 12px 14px; border-right: 1px solid #111111; border-bottom: 1px solid #111111;"><div class="label">[Metric]</div><div style="font-family: var(--display); font-weight: 700; font-size: 32px; line-height: 1.1;">[00]</div><div class="label" style="text-transform: none; color: #8f8d8b;">[unit]</div></div>
+        <div style="padding: 12px 14px; border-bottom: 1px solid #111111;"><div class="label">[Metric]</div><div style="font-family: var(--display); font-weight: 700; font-size: 32px; line-height: 1.1;">[00]</div><div class="label" style="text-transform: none; color: #8f8d8b;">[unit]</div></div>
+        <div style="padding: 12px 14px; border-right: 1px solid #111111;"><div class="label">My role</div><div style="font-family: var(--display); font-size: 15px; line-height: 1.35; margin-top: 4px;">[What you owned]</div></div>
+        <div style="padding: 12px 14px;"><div class="label">Tools</div><div style="font-family: var(--display); font-size: 15px; line-height: 1.35; margin-top: 4px;">[Stack / tools]</div></div>
+      </div>
+    </div>
+    <div class="pad" style="display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 40px 48px;">
+      <div style="display: flex; flex-direction: column; gap: 10px; max-width: 880px;">
+        <span class="label" style="color: #d53f30;">Main result</span>
+        <div style="font-family: var(--display); font-weight: 700; font-size: 40px; line-height: 1.05; letter-spacing: -.01em; text-wrap: balance;">[The one-line outcome a hiring manager should remember.]</div>
+      </div>
+      <div style="border: 1px dashed #8f8d8b; min-height: 360px; display: flex; align-items: center; justify-content: center;">
+        <span class="label" style="color: #8f8d8b;">[HERO IMAGE .PNG — screenshot, chart or visual]</span>
+      </div>
+      <div class="takeaways" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 10px; border-top: 2px solid #111111; padding-top: 14px;"><span class="idx">01</span><div style="font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1.15;">[Challenge]</div><div style="font-family: var(--display); font-size: 15px; line-height: 1.5; color: #4a4745;">[What was hard about it.]</div></div>
+        <div style="display: flex; flex-direction: column; gap: 10px; border-top: 2px solid #111111; padding-top: 14px;"><span class="idx">02</span><div style="font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1.15;">[Approach]</div><div style="font-family: var(--display); font-size: 15px; line-height: 1.5; color: #4a4745;">[What you did, concretely.]</div></div>
+        <div style="display: flex; flex-direction: column; gap: 10px; border-top: 2px solid #111111; padding-top: 14px;"><span class="idx">03</span><div style="font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1.15;">[Outcome]</div><div style="font-family: var(--display); font-size: 15px; line-height: 1.5; color: #4a4745;">[What changed, with a number if you have one.]</div></div>
+      </div>
+    </div>
+    <div class="pad" style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 48px; border-top: 1px solid #111111;">
+      <button class="btn" onClick="{{ goPax }}" style="border: none; padding-left: 0;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M18 12H6M12 6l-6 6 6 6"></path></svg>
+        Previous · 01
+      </button>
+      <button class="btn" onClick="{{ goSlot3 }}">Next case · 03
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M6 12h12M12 6l6 6-6 6"></path></svg>
+      </button>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ CASE 03 · slot ============ -->
+  <sc-if value="{{ isSlot3 }}" hint-placeholder-val="{{ false }}">
+  <div class="reveal" style="display: flex; flex-direction: column; flex-grow: 1;">
+    <div class="topbar pad" style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 14px 48px; border-bottom: 1px solid #111111;">
+      <button class="btn" onClick="{{ goHub }}" style="border: none; padding-left: 0;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M18 12H6M12 6l-6 6 6 6"></path></svg>
+        Index
+      </button>
+      <span class="idx" style="color: #8f8d8b;">CASE 03 / 03</span>
+    </div>
+    <div class="case-head pad" style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 48px; padding: 48px 48px 32px; align-items: end; border-bottom: 1px solid #111111;">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <span class="label">[YOUR ROLE] · [YEAR]</span>
+        <div class="h-case" style="font-family: var(--display); font-weight: 700; font-size: 128px; line-height: .88; letter-spacing: -.02em; color: #111111;">[PROJECT 03]</div>
+        <div style="font-family: var(--display); font-size: 22px; line-height: 1.3; color: #4a4745; max-width: 560px; text-wrap: pretty;">[Two sentences: what the client or product needed, and what you did about it.]</div>
+      </div>
+      <div class="meta" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border: 1px solid #111111;">
+        <div style="padding: 12px 14px; border-right: 1px solid #111111; border-bottom: 1px solid #111111;"><div class="label">[Metric]</div><div style="font-family: var(--display); font-weight: 700; font-size: 32px; line-height: 1.1;">[00]</div><div class="label" style="text-transform: none; color: #8f8d8b;">[unit]</div></div>
+        <div style="padding: 12px 14px; border-bottom: 1px solid #111111;"><div class="label">[Metric]</div><div style="font-family: var(--display); font-weight: 700; font-size: 32px; line-height: 1.1;">[00]</div><div class="label" style="text-transform: none; color: #8f8d8b;">[unit]</div></div>
+        <div style="padding: 12px 14px; border-right: 1px solid #111111;"><div class="label">My role</div><div style="font-family: var(--display); font-size: 15px; line-height: 1.35; margin-top: 4px;">[What you owned]</div></div>
+        <div style="padding: 12px 14px;"><div class="label">Tools</div><div style="font-family: var(--display); font-size: 15px; line-height: 1.35; margin-top: 4px;">[Stack / tools]</div></div>
+      </div>
+    </div>
+    <div class="pad" style="display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 40px 48px;">
+      <div style="display: flex; flex-direction: column; gap: 10px; max-width: 880px;">
+        <span class="label" style="color: #d53f30;">Main result</span>
+        <div style="font-family: var(--display); font-weight: 700; font-size: 40px; line-height: 1.05; letter-spacing: -.01em; text-wrap: balance;">[The one-line outcome a hiring manager should remember.]</div>
+      </div>
+      <div style="border: 1px dashed #8f8d8b; min-height: 360px; display: flex; align-items: center; justify-content: center;">
+        <span class="label" style="color: #8f8d8b;">[HERO IMAGE .PNG — screenshot, chart or visual]</span>
+      </div>
+      <div class="takeaways" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 10px; border-top: 2px solid #111111; padding-top: 14px;"><span class="idx">01</span><div style="font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1.15;">[Challenge]</div><div style="font-family: var(--display); font-size: 15px; line-height: 1.5; color: #4a4745;">[What was hard about it.]</div></div>
+        <div style="display: flex; flex-direction: column; gap: 10px; border-top: 2px solid #111111; padding-top: 14px;"><span class="idx">02</span><div style="font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1.15;">[Approach]</div><div style="font-family: var(--display); font-size: 15px; line-height: 1.5; color: #4a4745;">[What you did, concretely.]</div></div>
+        <div style="display: flex; flex-direction: column; gap: 10px; border-top: 2px solid #111111; padding-top: 14px;"><span class="idx">03</span><div style="font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1.15;">[Outcome]</div><div style="font-family: var(--display); font-size: 15px; line-height: 1.5; color: #4a4745;">[What changed, with a number if you have one.]</div></div>
+      </div>
+    </div>
+    <div class="pad" style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 48px; border-top: 1px solid #111111;">
+      <button class="btn" onClick="{{ goSlot2 }}" style="border: none; padding-left: 0;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M18 12H6M12 6l-6 6 6 6"></path></svg>
+        Previous · 02
+      </button>
+      <button class="btn" onClick="{{ goHub }}">Back to index</button>
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#d53f30","options":["#d53f30","#16b1cf","#43a13e","#e38727"]},"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { view: 'hub' };
+  }
+  go(view) {
+    return () => {
+      this.setState({ view });
+      try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
+    };
+  }
+  renderVals() {
+    const v = this.state.view;
+    return {
+      accent: this.props.accent ?? '#d53f30',
+      isHub: v === 'hub',
+      isPax: v === 'pax',
+      isSlot2: v === 'slot2',
+      isSlot3: v === 'slot3',
+      goHub: this.go('hub'),
+      goPax: this.go('pax'),
+      goSlot2: this.go('slot2'),
+      goSlot3: this.go('slot3'),
+    };
+  }
+}
+</script>
+</body>
+</html>
