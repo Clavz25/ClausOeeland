@@ -51,10 +51,26 @@ export default function CasePanel({ c, index, radius }) {
       style={{ background: c.bg, color: c.fg, border: `2px solid ${c.border}`, borderRadius: radius }}
     >
       <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1.5 border-b border-current pb-3 text-[11px] uppercase tracking-[0.14em] md:grid md:grid-cols-[auto_1fr_auto_auto] md:gap-6 md:pb-4 md:text-[12px]">
-        <span className="font-semibold">Case 0{index + 1} / 03</span>
+        <span className="font-semibold">Stage 0{index + 1} / {c.stage}</span>
         <span className="opacity-80">{c.client}</span>
         <span className="opacity-80">{c.year}</span>
         <span className="opacity-80">{c.markets}</span>
+      </div>
+
+      {/* Stage framing: what this stage is, before the proof that it works.
+          Deliberately quiet — mono at body size, no chips — so the case
+          headline below it stays the panel's arrival. */}
+      <div className="-mt-3 flex flex-col gap-6 md:-mt-6 md:grid md:grid-cols-[1.6fr_1fr] md:gap-x-[clamp(24px,4vw,56px)]">
+        <div className="flex min-w-0 flex-col gap-3">
+          <span className={labelClass}>What I do here</span>
+          <p className="m-0 max-w-[52ch] text-[13px] leading-[1.7] opacity-90 md:text-[14px]">
+            {c.capabilities.join('  /  ')}
+          </p>
+        </div>
+        <div className="flex min-w-0 flex-col gap-3">
+          <span className={labelClass}>Outcome</span>
+          <p className="m-0 max-w-[32ch] text-[15px] leading-[1.5] md:text-[16px]">{c.outcome}</p>
+        </div>
       </div>
 
       <h3 className="m-0 max-w-[14ch] font-display text-[clamp(32px,8.5vw,48px)] font-extrabold uppercase leading-[0.92] [overflow-wrap:anywhere] md:text-[clamp(40px,6vw,88px)]">{c.headline}</h3>

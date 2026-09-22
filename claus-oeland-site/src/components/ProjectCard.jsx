@@ -19,7 +19,7 @@ export default function ProjectCard({ c, index, isOpen, parallax, onOpen, onColl
     >
       <div
         onClick={() => !isOpen && onOpen()}
-        className="relative flex aspect-square flex-col justify-end p-[8%] [container-type:inline-size] will-change-transform"
+        className="relative flex aspect-square flex-col p-[8%] [container-type:inline-size] will-change-transform"
         style={{
           background: c.bg, color: c.fg,
           border: `2px solid ${c.border}`,
@@ -30,32 +30,30 @@ export default function ProjectCard({ c, index, isOpen, parallax, onOpen, onColl
           transition: `border-radius ${UNFOLD} ${EASE}, transform ${UNFOLD} ${EASE}`,
         }}
       >
-        {c.list ? (
-          <div className="absolute inset-0 flex flex-col p-[8%]">
-            {/* header: wordmark on the left of the card, the bottle beside it —
-                the index numeral holds the opposite corner */}
-            {c.logo ? (
-              <img
-                src={c.logo}
-                alt={`${c.title} wordmark`}
-                className="h-[clamp(15px,7cqw,32px)] w-auto self-start"
-              />
-            ) : null}
-            <div className="grid min-h-0 flex-1 grid-cols-[1.3fr_1fr] items-center gap-[4%]">
-              <ul className="m-0 flex list-none flex-col p-0 whitespace-nowrap leading-loose text-[clamp(9px,4.4cqw,14px)]">
-                {c.list.map((li) => <li key={li}>-{li}</li>)}
-              </ul>
-              <div
-                role="img" aria-label={`${c.title} packaging`}
-                className="aspect-[3/5] origin-bottom translate-y-[calc(-30%-12px)] scale-144 self-end bg-contain bg-no-repeat drop-shadow-[0_20px_28px_rgba(0,0,0,0.45)]"
-                style={{ backgroundImage: c.image ? `url("${c.image}")` : 'none', backgroundPosition: '50% 50%' }}
-              />
-            </div>
-          </div>
-        ) : (
-          <span className="text-[clamp(36px,4.6vw,72px)] leading-none">{c.title}</span>
-        )}
-        <span className="absolute right-[8%] top-[8%] text-[11px] uppercase tracking-[0.14em] opacity-75">0{index + 1}</span>
+        {/* stage word holds one top corner, the index numeral the other */}
+        <div className="flex items-start justify-between text-[11px] uppercase tracking-[0.14em] opacity-75">
+          <span>{c.stage}</span>
+          <span>0{index + 1}</span>
+        </div>
+
+        {/* proof imagery where there is any; otherwise the space stays empty and
+            lets the role heading sit low, the same way on all three cards */}
+        <div className="relative min-h-0 flex-1">
+          {c.image ? (
+            <div
+              role="img" aria-label={`${c.title} packaging`}
+              className="absolute inset-[6%_0_4%] bg-contain bg-center bg-no-repeat drop-shadow-[0_20px_28px_rgba(0,0,0,0.45)]"
+              style={{ backgroundImage: `url("${c.image}")` }}
+            />
+          ) : null}
+        </div>
+
+        {/* the role is the card's headline — one size below the ØELAND lockup,
+            with the line break authored in the data rather than left to wrap */}
+        <h3 className="m-0 font-display text-[clamp(22px,9.4cqw,44px)] font-extrabold uppercase leading-[0.92] tracking-[-0.01em]">
+          {c.role.map((line) => <span key={line} className="block">{line}</span>)}
+        </h3>
+        <p className="m-0 mt-[3%] text-[clamp(10px,3.6cqw,13px)] leading-[1.4] opacity-80">{c.promise}</p>
 
         {/* card footer, spec §4: hairline rule, mono label, square-cap arrow.
             z-10 keeps it above card 01's absolutely positioned overlay. */}
