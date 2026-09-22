@@ -1,7 +1,12 @@
 // Case content. bg/fg/border drive the card colour; tile/tileFg colour the icon squares in the fold-out.
 
+// Assets live in public/, so they need the deploy base in front of them —
+// root locally, /ClausOeeland/ on GitHub Pages. Vite rewrites bundled imports
+// but not string literals, so the prefix is applied here by hand.
+const asset = (file) => import.meta.env.BASE_URL + file
+
 // Placeholder until the real work images land — same frame in every gallery slot.
-const PLACEHOLDER = '/pax_facebook%20ad17.jpg'
+const PLACEHOLDER = asset('pax_facebook%20ad17.jpg')
 const placeholderGallery = (captions) =>
   captions.map((caption) => ({ src: PLACEHOLDER, alt: `${caption} — placeholder image`, caption }))
 
@@ -17,8 +22,8 @@ export const cases = [
     border: '#4E9E87',
     tile: '#F8F6F2',
     tileFg: '#4E9E87',
-    image: '/nasalspray.png',
-    logo: '/PAX_light_logo.png',
+    image: asset('nasalspray.png'),
+    logo: asset('PAX_light_logo.png'),
     list: [
       'MVP development',
       'GO-TO-MARKET dev',
@@ -41,7 +46,7 @@ export const cases = [
       { value: '—', label: 'KPIs' },
     ],
     gallery: [
-      { src: '/paxCampaign.jpg', alt: 'Paxinox campaign visual', caption: 'Campaign' },
+      { src: asset('paxCampaign.jpg'), alt: 'Paxinox campaign visual', caption: 'Campaign' },
       ...placeholderGallery(['Social ad', 'Packaging', 'Webshop', 'Style guide']),
     ],
     footer: 'Ref. 01 · Paxinox · Brand → Growth',
