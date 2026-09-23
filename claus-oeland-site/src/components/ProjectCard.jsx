@@ -12,20 +12,23 @@ const Arrow = () => (
 )
 
 export default function ProjectCard({ c, index, isOpen, parallax, onOpen, onCollapse, stacked = false }) {
+  // A stage opens only where there is a case behind it. The others state what
+  // the stage is and stop there — no empty Case Study to walk into.
+  const expandable = Boolean(c.problem)
   return (
     <div
       className="relative flex min-w-0 flex-col animate-fade-up"
       style={{ animationDelay: `${0.8 + index * 0.12}s` }}
     >
       <div
-        onClick={() => !isOpen && onOpen()}
-        className="relative flex aspect-square flex-col p-[8%] [container-type:inline-size] will-change-transform"
+        onClick={() => expandable && !isOpen && onOpen()}
+        className="relative flex aspect-square flex-col p-[8%] pt-[4%] [container-type:inline-size] will-change-transform"
         style={{
           background: c.bg, color: c.fg,
           border: `2px solid ${c.border}`,
           borderBottomColor: isOpen ? 'transparent' : c.border,
           borderRadius: isOpen ? `${R} ${R} 0 0` : R,
-          cursor: isOpen ? 'default' : 'pointer',
+          cursor: expandable && !isOpen ? 'pointer' : 'default',
           translate: `0 ${parallax}px`,
           transition: `border-radius ${UNFOLD} ${EASE}, transform ${UNFOLD} ${EASE}`,
         }}
@@ -36,27 +39,43 @@ export default function ProjectCard({ c, index, isOpen, parallax, onOpen, onColl
           <span>0{index + 1}</span>
         </div>
 
-        {/* proof imagery where there is any; otherwise the space stays empty and
-            lets the role heading sit low, the same way on all three cards */}
+        {/* where there is no case, the stage's capabilities fill the space the
+            mark would take, so all three cards carry weight */}
         <div className="relative min-h-0 flex-1">
-          {c.image ? (
-            <div
-              role="img" aria-label={`${c.title} packaging`}
-              className="absolute inset-[6%_0_4%] bg-contain bg-center bg-no-repeat drop-shadow-[0_20px_28px_rgba(0,0,0,0.45)]"
-              style={{ backgroundImage: `url("${c.image}")` }}
-            />
-          ) : null}
+          {!c.image && (
+            <p className="m-0 pt-[8%] text-[clamp(10px,3.4cqw,13px)] leading-[1.8] opacity-90">
+              {c.capabilities.join('  /  ')}
+            </p>
+          )}
         </div>
 
         {/* the role is the card's headline — one size below the ØELAND lockup,
-            with the line break authored in the data rather than left to wrap */}
-        <h3 className="m-0 font-display text-[clamp(22px,9.4cqw,44px)] font-extrabold uppercase leading-[0.92] tracking-[-0.01em]">
-          {c.role.map((line) => <span key={line} className="block">{line}</span>)}
-        </h3>
+            with the line break authored in the data rather than left to wrap.
+            The mark stands to its right, squared to the two-line headline height */}
+        <div className="flex items-center gap-[5%]">
+          <h3 className="m-0 min-w-0 font-display text-[clamp(22px,9.4cqw,44px)] font-extrabold uppercase leading-[0.92] tracking-[-0.01em]">
+            {c.role.map((line) => <span key={line} className="block">{line}</span>)}
+          </h3>
+          {c.image && (
+            <div
+              role="img" aria-label={c.imageAlt ?? c.title}
+              className="aspect-square w-[34cqw] shrink-0 bg-contain bg-center bg-no-repeat"
+              style={{ backgroundImage: `url("${c.image}")` }}
+            />
+          )}
+        </div>
         <p className="m-0 mt-[3%] text-[clamp(10px,3.6cqw,13px)] leading-[1.4] opacity-80">{c.promise}</p>
 
-        {/* card footer, spec §4: hairline rule, mono label, square-cap arrow.
-            z-10 keeps it above card 01's absolutely positioned overlay. */}
+        {/* card footer, spec §4: hairline rule, then either the control that
+            opens the case or — where there is no case — what the stage produces */}
+        {!expandable ? (
+          <p
+            className="relative z-10 m-0 mt-[7%] mb-[-4%] flex min-h-12 items-start pt-3.5 text-[clamp(10px,3.4cqw,12px)] leading-[1.45] opacity-85"
+            style={{ borderTop: '1px solid currentColor' }}
+          >
+            {c.outcome}
+          </p>
+        ) : (
         <button
           type="button"
           aria-expanded={isOpen}
@@ -74,6 +93,7 @@ export default function ProjectCard({ c, index, isOpen, parallax, onOpen, onColl
             </span>
           </span>
         </button>
+        )}
       </div>
 
       {/* connector: joins the open card to the panel below, with concave corners

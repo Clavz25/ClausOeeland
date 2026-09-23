@@ -1,8 +1,10 @@
 // Stage content. Each entry is one stage of the proposition (Validate →
-// Accelerate → Scale) with the proof that stands behind it.
+// Accelerate → Scale) with the proof that stands behind it. `problem` is what
+// marks a stage as expandable, so all three Cards open into a Case Study.
 //
-// Stage layer:  index, stage, role, promise, capabilities, outcome
-// Proof layer:  client, year, markets, problem, done, results, metrics, gallery
+// Stage layer:  stage, role, promise, capabilities, outcome
+// Proof layer:  title, client, year, markets, headline, problem, done, tags,
+//               results, metrics, gallery, footer
 //
 // bg/fg/border drive the card colour; tile/tileFg colour the icon squares in
 // the fold-out. `role` is an array because the line break is authored, not left
@@ -20,7 +22,7 @@ const placeholderGallery = (captions) =>
 
 export const cases = [
   {
-    id: 'paxinox-launch',
+    id: 'paxinox',
     stage: 'Validate',
     role: ['Go-to-market', 'strategist'],
     promise: 'Find the opportunity. Build the foundation.',
@@ -44,7 +46,8 @@ export const cases = [
     border: '#4E9E87',
     tile: '#F8F6F2',
     tileFg: '#4E9E87',
-    image: asset('nasalspray.png'),
+    image: asset('hugeicons_ai-idea.svg'),
+    imageAlt: 'Idea mark',
     headline: 'Making new products grow',
     problem:
       'A new anti-snoring nasal spray with a proven formula but no brand, no positioning and no route to market. Placeholder — here should be the story of what the problem was.',
@@ -61,10 +64,10 @@ export const cases = [
       { src: asset('paxCampaign.jpg'), alt: 'Paxinox campaign visual', caption: 'Campaign' },
       ...placeholderGallery(['Social ad', 'Packaging', 'Webshop', 'Style guide']),
     ],
-    footer: 'Stage 01 · Validate · Paxinox launch',
+    footer: 'Stage 01 · Validate · Paxinox',
   },
   {
-    id: 'paxinox-growth',
+    id: 'accelerate',
     stage: 'Accelerate',
     role: ['Growth &', 'marketing lead'],
     promise: 'Turn traction into a system.',
@@ -91,7 +94,8 @@ export const cases = [
     border: '#1E1E1E',
     tile: '#1E1E1E',
     tileFg: '#F8F6F2',
-    image: null,
+    image: asset('boxicons_sapling.svg'),
+    imageAlt: 'Sapling mark',
     headline: 'Turning a launch into a growth engine',
     problem:
       'The product was in market and selling, but growth came from activity rather than from a system: no repeatable acquisition loop, and no clear read on which channel was actually paying for itself. [BRACKETED PLACEHOLDER — the real story of the growth problem.]',
@@ -108,7 +112,7 @@ export const cases = [
     footer: 'Stage 02 · Accelerate · Paxinox growth',
   },
   {
-    id: 'klimamester',
+    id: 'scale',
     stage: 'Scale',
     role: ['Business & commercial', 'development'],
     promise: 'Find the next level of growth.',
@@ -133,7 +137,8 @@ export const cases = [
     border: '#DE3E2D',
     tile: '#F8F6F2',
     tileFg: '#DE3E2D',
-    image: null,
+    image: asset('f7_money-euro.svg'),
+    imageAlt: 'Euro mark',
     headline: 'Growth from somewhere other than spend',
     problem:
       '[BRACKETED PLACEHOLDER — what Klimamester was up against, and why more marketing spend was not the answer.]',

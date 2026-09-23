@@ -54,9 +54,11 @@ export default function Projects({ progress = 0 }) {
           {cases.map((c, i) => (
             <div key={c.id} ref={(el) => { rows.current[i] = el }} className="scroll-mt-4">
               <ProjectCard c={c} index={i} isOpen={open === i} parallax={0} stacked onOpen={() => openCase(i)} onCollapse={() => setOpen(-1)} />
-              <Fold open={open === i}>
-                <CasePanel c={c} index={i} radius={`0 0 ${R} ${R}`} />
-              </Fold>
+              {c.problem ? (
+                <Fold open={open === i}>
+                  <CasePanel c={c} index={i} radius={`0 0 ${R} ${R}`} />
+                </Fold>
+              ) : null}
             </div>
           ))}
         </div>

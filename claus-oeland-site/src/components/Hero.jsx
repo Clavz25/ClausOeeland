@@ -23,7 +23,8 @@ const Hero = forwardRef(function Hero({ progress: p }, ref) {
         className="mt-7 animate-fade-up [animation-delay:.6s] md:mt-10"
         style={{ transform: `translateY(${p * -30}px)`, opacity: 1 - e * 0.5 }}
       >
-        <p className="m-0 text-[clamp(16px,4.4vw,20px)] tracking-[0.02em] md:text-[clamp(18px,1.8vw,26px)]">- Find the problem. Build what&rsquo;s missing. Make it grow.</p>
+        {/* the three stages, in the order the Cards below run them */}
+        <p className="m-0 text-[clamp(16px,4.4vw,20px)] uppercase tracking-[0.08em] md:text-[clamp(18px,1.8vw,26px)]">Strategy <span className="opacity-60">&rarr;</span> Creative <span className="opacity-60">&rarr;</span> Growth</p>
         <p className="m-0 mt-3.5 max-w-[46ch] text-[13px] leading-[1.6] opacity-70 md:mt-5 md:text-[15px]">Strategy, brand, marketing, creative, technology and data — connected around one goal: making businesses work better.</p>
       </div>
     </section>
